@@ -18,6 +18,8 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "sirv-cli": "^2.0.0"
+    "@apollo/client": "^3.6.2",
+    "sirv-cli": "^2.0.0",
+    "svelte-apollo": "^0.5.0"
   }
 }
