@@ -14,8 +14,8 @@
     <h3 class="name">{name}</h3>
     <ul class="specs">
       <li>model: {model || 'unknown'}</li>
-      <li>weight: {weight_kg ||'unknown'}</li>
-      <li>speed: {speed_kn || 'unknown'}</li>
+      <li>weight: {weight_kg ? `${weight_kg}kg` : 'unknown'}</li>
+      <li>speed: {speed_kn ? `${speed_kn}kn` : 'unknown'}</li>
       <li>status: {status || 'unknown'}</li>
       <li>successful landings: {successful_landings ||'unknown'}</li>
       <li>built in: {year_built || 'unknown'}</li>
@@ -47,7 +47,7 @@
     padding: 0;
     list-style: none;
     font-size: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
-    line-height: 1.5em;
+    line-height: 2em;
   }
 
   .ship img {

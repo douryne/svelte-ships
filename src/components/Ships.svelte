@@ -4,9 +4,23 @@
   import { query } from "svelte-apollo";
 
   const ships = query(GET_SHIPS);
+  let page = 1;
+  let paginatedShips = [];
+  const maxElemsOnPage = 5;
+  $: pagesCount = Math.ceil($ships?.data?.ships.length / maxElemsOnPage);
+  $: {
+    if (!$ships.loading) {
+      paginatedShips = [...$ships.data.ships].slice((page - 1) * maxElemsOnPage, page * maxElemsOnPage);
+    }
+  }
 </script>
 
-<h1>Ships:</h1>
+<h1>Ships</h1>
+
+<div>
+  <button on:click={() => page -= 1} disabled={page === 1}>Prev</button>
+  <button on:click={() => page += 1} disabled={page === pagesCount || !pagesCount}>Next</button>
+</div>
 
 <div class="ships-list">
   {#if $ships.loading}
@@ -14,7 +28,7 @@
   {:else if $ships.error}
     Error: {$ships.error.message}
   {:else}
-    {#each $ships.data.ships as ship (ship.id)}
+    {#each paginatedShips as ship (ship.id)}
       <Ship {...ship} />
     {/each}
   {/if}
@@ -27,5 +41,11 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
   }
 </style>
