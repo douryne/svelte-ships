@@ -1,4 +1,5 @@
 <script>
+	import MyButton from './UI/MyButton.svelte';
   import Ship from './Ship.svelte';
 	import { GET_SHIPS } from '../queries/ships.js';
   import { query } from "svelte-apollo";
@@ -18,8 +19,8 @@
 <h1>Ships</h1>
 
 <div>
-  <button on:click={() => page -= 1} disabled={page === 1}>Prev</button>
-  <button on:click={() => page += 1} disabled={page === pagesCount || !pagesCount}>Next</button>
+  <MyButton on:click={() => page -= 1} disabled={page === 1}>Prev</MyButton>
+  <MyButton on:click={() => page += 1} disabled={page === pagesCount || !pagesCount}>Next</MyButton>
 </div>
 
 <div class="ships-list">
@@ -41,11 +42,5 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
-  }
-  button {
-    cursor: pointer;
-  }
-  button:disabled {
-    cursor: not-allowed;
   }
 </style>
