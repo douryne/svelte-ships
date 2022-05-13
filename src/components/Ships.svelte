@@ -1,9 +1,9 @@
 <script>
   import { onMount } from 'svelte';
-	import { GET_SHIPS } from '../queries/ships.js';
+  import { GET_SHIPS } from '../queries/ships.js';
   import { query } from "svelte-apollo";
 
-	import MyButton from './UI/MyButton.svelte';
+  import MyButton from './UI/MyButton.svelte';
   import Ship from './Ship.svelte';
 
   const ships = query(GET_SHIPS);
