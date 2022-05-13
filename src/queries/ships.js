@@ -4,7 +4,15 @@ export const GET_SHIPS = gql`
 
   query Ships {
     ships {
-      id, name
+      id,
+      name,
+      image,
+      weight_kg,
+      speed_kn,
+      model,
+      status,
+      successful_landings,
+      year_built
     }
   }
 
