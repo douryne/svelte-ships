@@ -29,7 +29,7 @@
     Error: {$ships.error.message}
   {:else}
     {#each paginatedShips as ship (ship.id)}
-      <Ship {...ship} />
+      <Ship specs={ship} />
     {/each}
   {/if}
 </div>

@@ -1,28 +1,21 @@
 <script>
-  export let name;
-  export let image;
-  export let model;
-  export let weight_kg;
-  export let speed_kn;
-  export let status;
-  export let successful_landings;
-  export let year_built;
+  export let specs;
 </script>
 
 <div class="ship">
   <div>
-    <h3 class="name">{name}</h3>
+    <h3 class="name">{specs?.name}</h3>
     <ul class="specs">
-      <li>model: {model || 'unknown'}</li>
-      <li>weight: {weight_kg ? `${weight_kg}kg` : 'unknown'}</li>
-      <li>speed: {speed_kn ? `${speed_kn}kn` : 'unknown'}</li>
-      <li>status: {status || 'unknown'}</li>
-      <li>successful landings: {successful_landings ||'unknown'}</li>
-      <li>built in: {year_built || 'unknown'}</li>
+      <li>model: {specs?.model || 'unknown'}</li>
+      <li>weight: {specs?.weight_kg ? `${specs?.weight_kg}kg` : 'unknown'}</li>
+      <li>speed: {specs?.speed_kn ? `${specs?.speed_kn}kn` : 'unknown'}</li>
+      <li>status: {specs?.status || 'unknown'}</li>
+      <li>successful landings: {specs?.uccessful_landings ||'unknown'}</li>
+      <li>built in: {specs?.year_built || 'unknown'}</li>
     </ul>
   </div>
-  {#if image}
-    <img src={image} alt="">
+  {#if specs?.image}
+    <img src={specs?.image} alt="">
   {:else}
     doesnt have image
   {/if}
