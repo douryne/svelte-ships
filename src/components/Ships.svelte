@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { GET_SHIPS } from '../queries/ships.js';
+  import { GET_SHIPS, GET_SHIPS_COUNT } from '../queries/ships.js';
   import { query } from "svelte-apollo";
 
   import MyButton from './UI/MyButton.svelte';
@@ -9,6 +9,7 @@
   let page = 1;
   const maxElemsOnPage = 5;
   let ships;
+  const shipsCount = query(GET_SHIPS_COUNT);
   let pagesCount = 0;
   
   onMount(() => {
@@ -25,10 +26,13 @@
       }
     });
   }
+
+  $: if (!$shipsCount.loading) {
+    pagesCount = Math.ceil($shipsCount.data.shipsResult.result.totalCount / maxElemsOnPage);
+  }
   
   $: if (!$ships.loading) {
-    pagesCount = Math.ceil($ships.data.shipsResult.result.totalCount / maxElemsOnPage);
-      localStorage.setItem('page', JSON.stringify(page));
+    localStorage.setItem('page', JSON.stringify(page));
   }
 </script>
 
@@ -45,7 +49,7 @@
   {:else if $ships.error}
     Error: {$ships.error.message}
   {:else}
-    {#each $ships.data.shipsResult.data as ship (ship.id)}
+    {#each $ships.data.ships as ship (ship.id)}
       <Ship specs={ship} />
     {/each}
   {/if}
